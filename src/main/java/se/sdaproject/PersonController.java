@@ -1,9 +1,9 @@
 package se.sdaproject;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,17 +17,16 @@ public class PersonController {
         this.personRepository = personRepository;
     }
 
-    @RequestMapping("/people")
+    @GetMapping("/people")
     public List<Person> listAllPeople() {
         List<Person> people = personRepository.findAll();
         return people;
     }
 
-    @RequestMapping("/people/create/{name}/{age}")
-    public Person createPerson(@PathVariable("name") String name, @PathVariable("age") int age) {
-        Person person = new Person(name, age);
+    @PostMapping("/people")
+    public ResponseEntity<Person> createPerson(@RequestBody Person person) {
         personRepository.save(person);
-        return person;
+        return ResponseEntity.status(HttpStatus.CREATED).body(person);
     }
 
 }
