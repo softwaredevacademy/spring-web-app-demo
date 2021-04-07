@@ -1,10 +1,8 @@
 package se.sdaproject;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Person {
@@ -15,6 +13,9 @@ public class Person {
 
     private String name;
     private int age;
+
+    @OneToMany(mappedBy = "owner")
+    private List<Car> cars;
 
     public Person() {
 
