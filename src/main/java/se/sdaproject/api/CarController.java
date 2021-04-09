@@ -1,4 +1,4 @@
-package se.sdaproject;
+package se.sdaproject.api;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -7,6 +7,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import se.sdaproject.repository.CarRepository;
+import se.sdaproject.repository.PersonRepository;
+import se.sdaproject.api.exception.ResourceNotFoundException;
+import se.sdaproject.model.Car;
+import se.sdaproject.model.Person;
 
 import javax.validation.Valid;
 

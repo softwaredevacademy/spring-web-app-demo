@@ -1,8 +1,13 @@
-package se.sdaproject;
+package se.sdaproject.api;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import se.sdaproject.api.exception.ResourceNotFoundException;
+import se.sdaproject.model.CarClub;
+import se.sdaproject.model.Person;
+import se.sdaproject.repository.CarClubRepository;
+import se.sdaproject.repository.PersonRepository;
 
 import java.util.List;
 

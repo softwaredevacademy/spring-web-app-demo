@@ -1,11 +1,14 @@
-package se.sdaproject;
+package se.sdaproject.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import se.sdaproject.model.Person;
+import se.sdaproject.repository.PersonRepository;
+import se.sdaproject.api.exception.ResourceNotFoundException;
+import se.sdaproject.service.PersonService;
 
-import java.lang.module.ResolutionException;
 import java.util.List;
 
 @RequestMapping("/people")
@@ -13,10 +16,12 @@ import java.util.List;
 public class PersonController {
 
     PersonRepository personRepository;
+    PersonService personService;
 
     @Autowired
-    public PersonController(PersonRepository personRepository) {
+    public PersonController(PersonRepository personRepository, PersonService personService) {
         this.personRepository = personRepository;
+        this.personService = personService;
     }
 
     @GetMapping
@@ -33,9 +38,7 @@ public class PersonController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Person> updatePerson(@PathVariable Long id, @RequestBody Person updatedPerson) {
-        personRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
-        updatedPerson.setId(id);
-        Person person = personRepository.save(updatedPerson);
+        Person person = personService.updatePerson(id, updatedPerson);
         return ResponseEntity.ok(person);
     }
 
