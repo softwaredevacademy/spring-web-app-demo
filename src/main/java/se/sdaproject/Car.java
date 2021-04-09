@@ -17,13 +17,13 @@ public class Car {
     private Long id;
 
     @Column(nullable = false)
-    @NotBlank
+    @NotNull
     private int topSpeed;
     @Column(nullable = false)
     @NotBlank
     private String registrationNumber;
 
-    @ManyToOne
+    @ManyToOne()
     @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
     @JsonIdentityReference(alwaysAsId = true)
     @JoinColumn(nullable = false)

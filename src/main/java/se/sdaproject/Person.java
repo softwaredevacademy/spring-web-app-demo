@@ -14,8 +14,11 @@ public class Person {
     private String name;
     private int age;
 
-    @OneToMany(mappedBy = "owner")
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
     private List<Car> cars;
+
+    @ManyToMany(mappedBy = "members")
+    private List<CarClub> clubs;
 
     public Person() {
 
